@@ -1,7 +1,7 @@
 # Todo List Manager API
 
 - A todo list manager API.
-- It is a challenge from this [repository](https://github.com/simplify-tec/desafio-junior-backend-simplify) by Simplify.
+- It is a challenge from this [repository](https://github.com/simplify-tec/desafio-junior-backend-simplify).
 
 ## Installation
 
@@ -11,7 +11,15 @@
 git clone git@github.com:matheusdoedev/todo-list-manager-api.git
 ```
 
-## How to run
+## How to run (with Docker)
+
+### 1. Use docker compose
+
+```sh
+docker-compose up
+```
+
+## How to run (without Docker)
 
 ### 1. Build
 
@@ -54,6 +62,8 @@ export JAVA_HOME="$HOME/.asdf/installs/java/openjdk-17.0.2" && java -jar target/
 - SpringDoc OpenAPI (Swagger)
 - MySQL
 - Lombok
+- Dockerfile
+- Docker Compose
 
 ```
 http://localhost:8080/swagger-ui/index.html#/
