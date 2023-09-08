@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.matheusdoedev.todolistmanager.api.dto.CreateTaskDto;
 import com.matheusdoedev.todolistmanager.api.dto.TaskDto;
 import com.matheusdoedev.todolistmanager.api.dto.UpdateTaskDto;
+import com.matheusdoedev.todolistmanager.api.exception.ResourceNotFoundException;
 import com.matheusdoedev.todolistmanager.api.mapper.TaskMapper;
 import com.matheusdoedev.todolistmanager.api.model.Task;
 import com.matheusdoedev.todolistmanager.api.repository.TaskRepository;
@@ -19,6 +20,8 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class TaskServiceImpl implements TaskService {
+
+	static final String TASK_ID_FIELD_NAME = "taskId";
 
 	private final TaskRepository taskRepository;
 
@@ -42,7 +45,7 @@ public class TaskServiceImpl implements TaskService {
 		Optional<Task> task = this.taskRepository.findById(taskId);
 
 		if (!task.isPresent()) {
-			throw new Error("Não Sei");
+			throw new ResourceNotFoundException("Task", TASK_ID_FIELD_NAME, taskId.toString());
 		}
 
 		Task savedTask = task.get();
@@ -72,12 +75,10 @@ public class TaskServiceImpl implements TaskService {
 		Optional<Task> task = this.taskRepository.findById(taskId);
 
 		if (!task.isPresent()) {
-			throw new Error("Não Sei");
+			throw new ResourceNotFoundException("Task", TASK_ID_FIELD_NAME, taskId.toString());
 		}
 
-		Task savedTask = task.get();
-
-		return TaskMapper.parseToTaskDto(savedTask);
+		return TaskMapper.parseToTaskDto(task.get());
 	}
 
 	public List<TaskDto> listTasks() {
@@ -87,6 +88,12 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	public void deleteTask(UUID taskId) {
-		this.taskRepository.deleteById(taskId);
+		Optional<Task> task = this.taskRepository.findById(taskId);
+
+		if (!task.isPresent()) {
+			throw new ResourceNotFoundException("Task", TASK_ID_FIELD_NAME, taskId.toString());
+		}
+
+		this.taskRepository.delete(task.get());
 	}
 }
