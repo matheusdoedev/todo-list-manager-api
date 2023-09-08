@@ -3,7 +3,6 @@ package com.matheusdoedev.todolistmanager.api.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,7 +51,8 @@ public class TaskController {
 
 	@GetMapping("{taskId}")
 	@Operation(summary = "Show a specific task.")
-	@ApiResponse(responseCode = "200", description = "Task found.")
+	@ApiResponse(responseCode = "200", description = "Task showed.")
+	@ApiResponse(responseCode = "404", description = "Task not found.")
 	public ResponseEntity<TaskDto> getShowTask(@PathVariable("taskId") UUID taskId) {
 		TaskDto task = this.taskService.showTask(taskId);
 
@@ -62,6 +62,7 @@ public class TaskController {
 	@PutMapping("/update/{taskId}")
 	@Operation(summary = "Update a task.")
 	@ApiResponse(responseCode = "200", description = "Task updated.")
+	@ApiResponse(responseCode = "404", description = "Task not found.")
 	public ResponseEntity<TaskDto> putUpdateTask(@PathVariable("taskId") UUID taskId, UpdateTaskDto taskDto) {
 		TaskDto updatedTask = this.taskService.updateTask(taskId, taskDto);
 
@@ -71,6 +72,7 @@ public class TaskController {
 	@DeleteMapping("/delete/{taskId}")
 	@Operation(summary = "Delete a task.")
 	@ApiResponse(responseCode = "200", description = "Task deleted.")
+	@ApiResponse(responseCode = "404", description = "Task not found.")
 	public ResponseEntity<String> deleteTask(@PathVariable("taskId") UUID taskId) {
 		this.taskService.deleteTask(taskId);
 

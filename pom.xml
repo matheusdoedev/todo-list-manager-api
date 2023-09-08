@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>com.matheusdoedev.todolistmanager</groupId>
 	<artifactId>api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>v1.0.0</version>
 	<name>api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>A todo list manager API.</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 
