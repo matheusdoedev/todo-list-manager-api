@@ -1,7 +1,7 @@
 # Todo List Manager API
 
 - A todo list manager API.
-- It is a challenger from this [repository](https://github.com/simplify-tec/desafio-junior-backend-simplify).
+- It is a challenge from this [repository](https://github.com/simplify-tec/desafio-junior-backend-simplify) by Simplify.
 
 ## Installation
 
